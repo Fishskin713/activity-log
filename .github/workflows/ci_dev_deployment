@@ -24,7 +24,7 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Development
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v4
@@ -41,7 +41,7 @@ jobs:
   deploy-staging:
     needs: deploy-dev
     runs-on: ubuntu-latest
-    environment: staging
+    environment: Staging
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -59,7 +59,7 @@ jobs:
   deploy-production:
     needs: deploy-staging
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
