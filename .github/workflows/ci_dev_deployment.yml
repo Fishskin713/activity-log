@@ -45,9 +45,7 @@ jobs:
   deploy-staging:
     needs: build
     runs-on: ubuntu-latest
-    environment: 
-      name: Staging
-      url: 'http://test.myapp.com'
+    environment: Staging
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
