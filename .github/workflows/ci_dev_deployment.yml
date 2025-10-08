@@ -39,7 +39,7 @@ jobs:
         run: |
           gh release create "$TAG" build.zip --notes "$NOTE"
   deploy-staging:
-    needs: deploy-dev
+    needs: build
     runs-on: ubuntu-latest
     environment: Staging
     steps:
