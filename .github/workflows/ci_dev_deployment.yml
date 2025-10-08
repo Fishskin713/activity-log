@@ -13,6 +13,7 @@ jobs:
       - name: build
         run: |
           npm install
+          npm install -g @vercel/ncc
           npm run build
           zip -r build.zip .
       - name: Upload Artifact
