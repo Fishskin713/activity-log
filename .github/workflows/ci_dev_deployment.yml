@@ -42,6 +42,7 @@ jobs:
         run: |
           gh release delete "$TAG" -y || true
           gh release create "$TAG" build.zip --notes "$NOTE"
+          
   deploy-staging:
     needs: build
     runs-on: ubuntu-latest
@@ -49,9 +50,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
-      - name: Deploy
-        run: echo I am deploying!
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+
+      - name: Verify Artifact
+        run: ls -al
 
       - name: Release Staging Build
         env:
@@ -59,6 +65,7 @@ jobs:
           TAG: ${{ vars.BUILD_TAG }}
           NOTE: ${{ vars.RELEASE_NOTE }}
         run: |
+          echo "Releasing STAGING version: $TAG"
           gh release delete "$TAG" -y || true
           gh release create "$TAG" build.zip --notes "$NOTE"
 
