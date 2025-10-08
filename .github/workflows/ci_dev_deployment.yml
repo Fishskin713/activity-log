@@ -49,6 +49,9 @@ jobs:
       name: Staging
       url: 'http://test.myapp.com'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - name: Deploy
         run: echo I am deploying!
 
