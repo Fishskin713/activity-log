@@ -44,14 +44,12 @@ jobs:
   deploy-staging:
     needs: build
     runs-on: ubuntu-latest
-    environment: Staging
+    environment: 
+      name: Staging
+      url: 'http://test.myapp.com'
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifact
+      - name: Deploy
+        run: echo I am deploying!
 
       - name: Release Staging Build
         env:
@@ -64,14 +62,12 @@ jobs:
   deploy-production:
     needs: deploy-staging
     runs-on: ubuntu-latest
-    environment: Production
+    environment: 
+      name: Production
+      url: 'http://www.myapp.com'
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifact
+      - name: Deploy
+        run: echo I am deploying!
 
       - name: Release Production Build
         env:
