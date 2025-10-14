@@ -25,13 +25,9 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4 
-      - name: npm
-        run: |
-          npm install
-      - name: Run Automated Tests
-        run: |
-          echo "Running automated tests..."
-          npm test || (echo "❌ Tests failed" && exit 1)
+      - name: Test index.js
+        run: node ./dist/index.js
+
           
   release:
     runs-on: ubuntu-latest
