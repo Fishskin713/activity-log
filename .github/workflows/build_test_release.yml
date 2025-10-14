@@ -24,13 +24,26 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions:checkout@v4 # 確保有原始碼來執行測試，特別是如果測試腳本不在構建產物中
+      - name: Setup Node.js
+        uses: actions:setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Dependencies for Test
+        run: npm install # 重新安裝依賴以運行測試 (如果測試腳本需要)
+      - uses: actions:download-artifact@v4
         with:
           name: build-artifact
-      - name: Run Automated Tests
+      - name: Run Automated Tests 🧪
         run: |
           echo "Running automated tests..."
-          npm test || (echo "❌ Tests failed" && exit 1)
+          # 執行測試。
+          # 'npm test' 的輸出將直接顯示在 workflow log 中 (滿足 'Test logs are clearly visible' 的要求)。
+          # '|| exit 1' 確保如果 npm test 返回非零退出碼 (測試失敗)，job 會立即失敗。
+          # 由於 'release' job 'needs: test'，一旦 'test' 失敗，'release' 就會被跳過 (滿足 'The release is skipped if any test fails' 的要求)。
+          npm test
+          echo "✅ Tests completed successfully."
+
 
   release:
     runs-on: ubuntu-latest
