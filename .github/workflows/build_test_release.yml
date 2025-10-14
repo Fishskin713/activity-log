@@ -24,14 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      -# 步驟 1: 檢出程式碼（這是缺少的關鍵步驟）
       - uses: actions/checkout@v4 
       
-      # 步驟 2: 安裝依賴（進行 npm test 前必須）
       - name: Install dependencies for test
         run: npm install
 
-      # 步驟 3: 執行測試
       - name: Run Automated Tests
         run: |
           echo "Running automated tests..."
