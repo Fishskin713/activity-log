@@ -25,10 +25,9 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4 
-      
-      - name: Install dependencies for test
-        run: npm install
-
+      - name: npm
+        run: |
+          npm install
       - name: Run Automated Tests
         run: |
           echo "Running automated tests..."
