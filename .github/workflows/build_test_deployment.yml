@@ -1,7 +1,7 @@
 name: Build Test Deployment
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
