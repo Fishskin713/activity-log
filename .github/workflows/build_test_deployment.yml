@@ -22,26 +22,30 @@ jobs:
           name: build-artifact
           path: build.zip
 
-  deploy-dev:
-    needs: build
+  test:
     runs-on: ubuntu-latest
-    environment: Development
+    needs: build
+    defaults:
+      run:
+        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 
-      - name: Download Artifact
+      - uses: actions/checkout@v4 
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-
-      - name: Release Dev Build
+          path: dist/
+      - name: Test test.js
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          TAG: ${{ vars.BUILD_TAG }}
-          NOTE: ${{ vars.RELEASE_NOTE }}
-        run: |
-          gh release delete "$TAG" -y || true
-          gh release create "$TAG" build.zip --notes "$NOTE"
+          INPUT_GITHUB_USERNAME: "Fishskin713"
+          INPUT_GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          INPUT_TARGET_REPOS: '[Fishskin713/activity-log]'
+          INPUT_OUTPUT_STYLE: MARKDOWN
+          INPUT_IGNORE_EVENTS: '[]'
+          INPUT_README_PATH: README.md
+          INPUT_COMMIT_MESSAGE: Update README.md
+          INPUT_EVENT_LIMIT: '100'
+        run: node ./dist/test.js
           
   deploy-staging:
     needs: build
