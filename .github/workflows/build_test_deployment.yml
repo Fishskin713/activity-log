@@ -48,7 +48,7 @@ jobs:
         run: node ./dist/test.js
           
   deploy-staging:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     environment: Staging
     steps:
