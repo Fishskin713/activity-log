@@ -1,3 +1,3 @@
 // test.js
 console.log("Hello, World!");
-console.log("test output");
+console.log("test");
