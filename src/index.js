@@ -15,5 +15,5 @@ async function main() {
     }
 }
 
-// Execute the main function
+// Main function execution
 main();
