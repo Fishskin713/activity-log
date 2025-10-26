@@ -1,4 +1,4 @@
 // test.js
 console.log("Hello, World!");
-// test output
+// testing output
 console.log("test output in test.js");
