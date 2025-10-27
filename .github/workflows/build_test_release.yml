@@ -2,7 +2,7 @@ name: Build-Test-Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ b11009033-oss-patch-1 ]
   workflow_dispatch:
 
 jobs:
